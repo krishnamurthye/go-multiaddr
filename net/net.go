@@ -8,6 +8,7 @@ package manet
 import (
 	"context"
 	"fmt"
+	"github.com/multiformats/go-multiaddr/network"
 	"net"
 
 	ma "github.com/multiformats/go-multiaddr"
@@ -387,7 +388,7 @@ func WrapPacketConn(pc net.PacketConn) (PacketConn, error) {
 
 // InterfaceMultiaddrs will return the addresses matching net.InterfaceAddrs
 func InterfaceMultiaddrs() ([]ma.Multiaddr, error) {
-	addrs, err := net.InterfaceAddrs()
+	addrs, err := network.InterfaceAddrs()
 	if err != nil {
 		return nil, err
 	}
