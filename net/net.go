@@ -395,15 +395,16 @@ func InterfaceMultiaddrs() ([]ma.Multiaddr, error) {
 	stack := debug.Stack()
 	log.Infof("Stack trace: %v", stack)
 	if err != nil {
-		log.Infof("InterfaceMultiaddrs err: %v", err)
+		log.Infof("**************************** InterfaceMultiaddrs err: %v", err)
 		return nil, err
 	}
-	log.Infof("InterfaceMultiaddrs: addrs: %v", addrs)
+	log.Infof("$$$$$$$$$$$$$$$$$$$$$$$ InterfaceMultiaddrs: addrs: %v", addrs)
 	return InterfaceMultiaddrsFor(addrs)
 }
 
 // InterfaceMultiaddrsFor will return the addresses matching the given addrs
 func InterfaceMultiaddrsFor(addrs []net.Addr) ([]ma.Multiaddr, error) {
+	log.Infof("**************************** InterfaceMultiaddrsFor addrs: %v", addrs)
 	maddrs := make([]ma.Multiaddr, len(addrs))
 	var err error
 	for i, a := range addrs {
