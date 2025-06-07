@@ -9,9 +9,13 @@ import (
 	"context"
 	"fmt"
 	"net"
+	"runtime/debug"
 
+	logging "github.com/ipfs/go-log/v2"
 	ma "github.com/multiformats/go-multiaddr"
 )
+
+var log = logging.Logger("multiaddrnet")
 
 // Conn is the equivalent of a net.Conn object. It is the
 // result of calling the Dial or Listen functions in this
@@ -388,10 +392,13 @@ func WrapPacketConn(pc net.PacketConn) (PacketConn, error) {
 // InterfaceMultiaddrs will return the addresses matching net.InterfaceAddrs
 func InterfaceMultiaddrs() ([]ma.Multiaddr, error) {
 	addrs, err := net.InterfaceAddrs()
+	stack := debug.Stack()
+	log.Infof("Stack trace: %v", stack)
 	if err != nil {
+		log.Infof("InterfaceMultiaddrs err: %v", err)
 		return nil, err
 	}
-
+	log.Infof("InterfaceMultiaddrs: addrs: %v", addrs)
 	return InterfaceMultiaddrsFor(addrs)
 }
 
