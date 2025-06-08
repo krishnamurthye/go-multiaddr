@@ -1,6 +1,11 @@
 package network
 
-import "net"
+import (
+	logging "github.com/ipfs/go-log/v2"
+	"net"
+)
+
+var log = logging.Logger("multiaddrnet")
 
 type NetProvider interface {
 	Interfaces() ([]net.Interface, error)
@@ -10,10 +15,12 @@ type NetProvider interface {
 type defaultNetProvider struct{}
 
 func (defaultNetProvider) Interfaces() ([]net.Interface, error) {
+	log.Infof("defaultNetProvider net.Interfaces")
 	return net.Interfaces()
 }
 
 func (defaultNetProvider) InterfaceAddrs() ([]net.Addr, error) {
+	log.Infof("defaultNetProvider net.InterfaceAddrs")
 	return net.InterfaceAddrs()
 }
 
